@@ -7,11 +7,20 @@
     
     <key>ProgramArguments</key>
     <array>
-        <string>/Library/LaunchAgents/run.sh</string>
+        <string>/Library/Frameworks/Python.framework/Versions/3.10/bin/python3</string>
+        <string>/Library/LaunchAgents/crawler.py</string>
     </array>
 
-    <key>StartInterval</key>
-    <integer>60</integer>
-
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>16</integer>
+        <key>Minute</key>
+        <integer>00</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/skywalker/Downloads/stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>//Users/skywalker/Downloads/stderr.err</string>
 </dict>
 </plist>
