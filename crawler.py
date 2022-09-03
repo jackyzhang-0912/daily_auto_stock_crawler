@@ -3,7 +3,8 @@ from locale import currency
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
-from datetime import date
+from datetime import datetime
+from time import strftime
 from urllib import response
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -29,7 +30,8 @@ def sendMail(stockDict):
         # receiver's nickname and email address
         msg['To'] = formataddr(["jackyGmail", receiver])
         # subject of the email
-        msg['Subject'] = "Daily Stock"
+        subject = dateOutput + ' --- ' 'Stock Briefing'
+        msg['Subject'] = subject
         server = smtplib.SMTP_SSL("smtp.qq.com", 465)
         # using smtp code to login
         server.login(sender, smtp_code)
@@ -67,7 +69,7 @@ browser = webdriver.Chrome(service=service)
 
 # dictionary contains stocks' names and corresponding urls
 stockDict = {
-    "Tencent": "https://quote.eastmoney.com/hk/00700.html",
+    # "Tencent": "https://quote.eastmoney.com/hk/00700.html",
     "PingAn Bank": "https://quote.eastmoney.com/sz000001.html",
     "Apple" : "https://quote.eastmoney.com/us/AAPL.html"
 }
@@ -76,6 +78,11 @@ currencyMap = {
   "港元": "HKD",
   "美元": "USD"
 }
+
+date = datetime.now().date().strftime('%Y-%m-%d')
+dateName = datetime.now().strftime('%A')
+dateOutput = date + ' ' + dateName
+
 ret = sendMail(stockDict)
 
 if ret:
